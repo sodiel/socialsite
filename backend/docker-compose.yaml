@@ -1,0 +1,16 @@
+name: backend
+
+services:
+  database:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: 'admin'
+      POSTGRES_PASSWORD: 'password'
+      POSTGRES_DB: 'dev'
+    ports:
+      - '5464:5432'
+    volumes:
+      - database-pg:/var/lib/postgresql/data
+    networks:
+      - backend

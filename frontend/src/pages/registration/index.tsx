@@ -1,20 +1,25 @@
-<!DOCTYPE html>
-<html lang="ru">
+import { useState } from "react";
+import "../../index.css";
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
-  <link href="css/style.css" rel="stylesheet">
-</head>
+function App() {
+  const [count, setCount] = useState(0);
+  return (
+    <>
+    <main className="h-screen px-5 py-5 align-middle ">
+    <p className="text-red-300">REGISTRATION</p>
+        {Input("asdfasdf", "adsfasd")}
+    </main>
 
-<body>
-  <div>
-    <h1 class="xl font-sans">Создать аккаунт</h1>
-    <label for=""></label>
-    <input id="email" type="email" placeholder="Введите почту">
+    </>
+  );
+}
 
-  </div>
-</body>
-
-</html>
+function Input(label, placeholder="") {
+  return (
+    <>
+      <label for="{label}" className="text-left">{label}</label>
+      <input id="{label}" className="block border-gray-50 rounded-s" placeholder={placeholder} label={label}></input>
+    </>
+  );
+}
+export default App;

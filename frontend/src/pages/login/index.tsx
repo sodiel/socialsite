@@ -14,34 +14,24 @@ import {
 import { Label } from "@/components/ui/label"
 import { InputField }  from "@/components/ui/input-field"
 
-export function Registration() {
+export function Login() {
   return (
     <Card className="w-[450px] text-left">
       <CardHeader>
-        <CardTitle className="">Создать аккаунт</CardTitle>
+        <CardTitle className="">Войти</CardTitle>
       </CardHeader>
       <CardContent>
         <form>
           <div className="text-left grid w-full items-center gap-4">
             <InputField id="email" label="Почта" placeholder="Введите почту" type="email"/>
             <InputField id="password" label="Пароль" placeholder="Введите пароль" type="password" />
-            <InputField id="password" label="Повторите пароль" placeholder="Повторите пароль" type="password" />
-            
-            
-            <Tabs defaultValue="reader">
-            <Label className="flex mb-2">Выберите роль</Label>
-              <TabsList>
-                <TabsTrigger value="reader">Читатель</TabsTrigger>
-                <TabsTrigger value="autor">Автор</TabsTrigger>
-              </TabsList>
-            </Tabs>
           </div>
         </form>
       </CardContent>
       <CardFooter className="block text-left">
-        <Button className="w-full">Создать аккаунт</Button>
+        <Button className="w-full">Войти</Button>
         <CardDescription className="mt-4">
-          <p>Уже есть аккаунт? <a className="" href="/login">Войти</a></p>
+          <p>Нет аккаунта? <a className="" href="/registration">Создать аккаунт</a></p>
         </CardDescription>
       </CardFooter>
     </Card>

@@ -11,7 +11,14 @@ services:
     ports:
       - '5464:5432'
     volumes:
+<<<<<<< Updated upstream
       - database-pg:/var/lib/postgresql/data
 
 volumes:
   database-pg:
+=======
+      - database-pg:/var/lib/postgresql/data`
+
+volumes:
+  database-pg:
+>>>>>>> Stashed changes

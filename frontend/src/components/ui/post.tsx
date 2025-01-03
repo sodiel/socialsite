@@ -4,7 +4,7 @@ import { MessageCircle } from 'lucide-react';
 import { Heart } from 'lucide-react';
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
-
+import { EditPost } from "@/components/ui/edit-post";
 import {
   Card,
   CardContent,
@@ -33,13 +33,13 @@ interface InputPostProps {
         return (
           <>
             <Button>Опубликовать пост</Button>
-            <Button variant="secondary">Редактировать</Button>
+               <EditPost></EditPost>
           </>
         );
       case "editable":
         return (
           <>
-            <Button variant="secondary">Редактировать</Button>
+            <EditPost></EditPost>
           </>
         );
       default:

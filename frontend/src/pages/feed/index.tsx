@@ -3,6 +3,7 @@ import * as React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Post } from "@/components/ui/post";
 import { CreatePost } from "@/components/ui/create-post";
+import { EditPost } from "@/components/ui/edit-post";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -25,8 +26,8 @@ export function Feed() {
     <>
       <div
         id="header"
-        className="z-10 bg-slate-50 top-0 left-0 flex w-full fixed"
- >
+        className="z-10 bg-slate-50 top-0 left-0 flex w-full h-[5%] fixed"
+      >
         <img alt="ЦПТ" src="/src/assets/logo.svg" className="w-20 ml-4" />
         <div id="account" className="flex ml-auto mr-4 mt-2">
           <p className="mr-1">{author}</p>
@@ -36,23 +37,20 @@ export function Feed() {
           </Avatar>
         </div>
       </div>
-      <div className="fixed z-10  w-full bg-slate-100 pt-0">
-      <div className="w-full mt-4 flex justify-start">
-        <Tabs defaultValue="all_posts" className="">
-          <TabsList>
-            <TabsTrigger value="all_posts">Все посты</TabsTrigger>
-            <TabsTrigger value="my_posts">Мои посты</TabsTrigger>
-            <TabsTrigger value="drafts">Черновики</TabsTrigger>
-          </TabsList>
-        </Tabs>
-      </div>
-      <div className="w-[100%]">
-      <CreatePost></CreatePost>
-      </div>
+      <div className="">
+        <div className="w-full mt-4 flex justify-start">
+          <Tabs defaultValue="all_posts" className="">
+            <TabsList>
+              <TabsTrigger value="all_posts">Все посты</TabsTrigger>
+              <TabsTrigger value="my_posts">Мои посты</TabsTrigger>
+              <TabsTrigger value="drafts">Черновики</TabsTrigger>
+            </TabsList>
+          </Tabs>
+        </div>
+        <CreatePost></CreatePost>
       </div>
 
-
-      <div id="posts" className="flex-col max-w-[600px] mt-[100px]">
+      <div id="posts" className="flex-col max-w-[600px]">
         {[...Array(5)].map(() => (
           <Post
             author={author}
@@ -92,4 +90,3 @@ Ullus investigandi veri, nisi inveneris, et quaerendi defatigatio turpis est, cu
     </>
   );
 }
-

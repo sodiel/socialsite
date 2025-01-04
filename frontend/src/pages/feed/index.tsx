@@ -18,12 +18,21 @@ import {
 import { Label } from "@/components/ui/label";
 import { InputField } from "@/components/ui/input-field";
 
+import { Newspaper } from "lucide-react";
+import { Phone } from "lucide-react";
+import { LogOut } from "lucide-react";
+
+import Sidebar from "@/components/ui/app-sidebar";
+
 export function Feed() {
   const author: string = "pochta@gmail.com";
   const date: string = "5 декабря";
 
   return (
     <>
+      <div className="fixed left-0 ">
+        <Sidebar></Sidebar>
+      </div>
       <div
         id="header"
         className="z-10 bg-slate-50 top-0 left-0 flex w-full h-[5%] fixed"

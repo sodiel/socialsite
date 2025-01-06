@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prismaschema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerateinit
+
+generator client {
+  provider = "prismaclientjs"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int     @id @default(autoincrement())
+  email     String  @unique
+  firstName String?
+  lastName  String?
+  social    Json?
+  role      Role
+
+  // Relation fields
+  tokens Token[]
+}
+
+enum Role {
+  READER
+  AUTHOR
+}
+
+model Token {
+  id         Int       @id @default(autoincrement())
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  type       TokenType
+  emailToken String?   @unique // Only used for short lived email tokens
+  valid      Boolean   @default(true)
+  expiration DateTime
+
+  // Relation fields
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+}
+
+enum TokenType {
+  EMAIL // used as a shortlived token sent to the user's email
+  API
+}

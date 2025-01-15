@@ -1,26 +1,9 @@
-import * as React from "react";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Post } from "@/components/ui/post";
 import { CreatePost } from "@/components/ui/create-post";
-import { EditPost } from "@/components/ui/edit-post";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 
-import { Label } from "@/components/ui/label";
-import { InputField } from "@/components/ui/input-field";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import { Newspaper } from "lucide-react";
-import { Phone } from "lucide-react";
-import { LogOut } from "lucide-react";
 
 import Sidebar from "@/components/ui/app-sidebar";
 

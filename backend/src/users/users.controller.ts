@@ -1,33 +1,65 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ConflictException, InternalServerErrorException } from '@nestjs/common';
+import { LoginUserDto } from './login-user.dto'; 
 import { UsersService } from './users.service';
-import { Prisma } from '@prisma/client';
+import { $Enums, Prisma, Role } from '@prisma/client';
 
-@Controller('users')
-export class UsersController {
+import { IsNotEmpty, IsString, IsEmail, Length, IsStrongPassword, minLength, IsEnum } from 'class-validator';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+
+export class CreateUserValidation implements Prisma.UserCreateInput{
+  @IsNotEmpty()
+  @Length(8)
+  password: string;
+  @IsEnum(Role)
+  role: $Enums.Role;
+  posts?: Prisma.PostCreateNestedManyWithoutAuthorInput;
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
+}
+
+@Controller('/auth')
+export class AuthController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post()
-  create(@Body() createUserDto: Prisma.UserCreateInput) {
-    return this.usersService.create(createUserDto);
+  @Post('/login')
+  async login(@Body() loginUserDto: LoginUserDto) {
+    return this.usersService.login(loginUserDto);
   }
 
-  @Get()
+
+  @Post("/register")
+async create(@Body() createUserValidation: CreateUserValidation) {
+  try {
+    return await this.usersService.register(createUserValidation);
+  } catch (error) {
+    if (error instanceof PrismaClientKnownRequestError) {
+      if (error.code === 'P2002') {
+        throw new ConflictException('Email already exists'); 
+      }
+    }
+    throw new InternalServerErrorException('Internal server error');
+  }
+}
+
+  @Get('/users')
   findAll() {
     return this.usersService.findAll();
   }
 
-  @Get(':id')
+  @Get('/users/:id')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Patch('/users/:id')
   update(@Param('id') id: string, @Body() updateUserDto: Prisma.UserUpdateInput) {
     return this.usersService.update(+id, updateUserDto);
   }
 
-  @Delete(':id')
+  @Delete('/users/:id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);
   }
 }
+

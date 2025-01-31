@@ -14,11 +14,12 @@ datasource db {
 }
 
 model User {
-  id           Int    @id @default(autoincrement())
-  email        String @unique
-  passwordHash String
-  role         Role
-  posts        Post[]
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
+  role     Role
+  posts    Post[]
+  //like     Like[]
 }
 
 enum Role {
@@ -34,10 +35,11 @@ model Post {
   content        String
   createdAt      DateTime   @default(now())
   updatedAt      DateTime   @updatedAt
-  status         PostStatus // "Draft" или "Published"
-  image          Image[] // Связь с картинкой
-
-  author User @relation(fields: [authorId], references: [id]) // Связь с автором
+  status         PostStatus @default(PUBLISHED)
+  image          Image?
+  like           Int        @default(0)
+  comments       Int        @default(0)
+  author         User       @relation(fields: [authorId], references: [id])
 }
 
 enum PostStatus {
@@ -47,9 +49,27 @@ enum PostStatus {
 
 model Image {
   id        Int      @id @default(autoincrement())
-  postId    Int
+  postId    Int      @unique
   imageUrl  String
   createdAt DateTime @default(now())
 
-  post Post @relation(fields: [postId], references: [id]) // Связь с постом
+  post Post @relation(fields: [postId], references: [id])
 }
+
+// model Comment {
+//   id       Int    @id @default(autoincrement())
+//   authorId Int
+//   content  String
+//   Post     Post?  @relation(fields: [postId], references: [id])
+//   postId   Int?
+// }
+
+// model Like {
+//   id        Int      @id @default(autoincrement())
+//   userId    Int
+//   postId    Int
+//   createdAt DateTime @default(now())
+
+//   user User @relation(fields: [userId], references: [id])
+//   post Post @relation(fields: [postId], references: [id])
+// }

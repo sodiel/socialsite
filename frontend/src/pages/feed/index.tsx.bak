@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Post } from "@/components/ui/post";
@@ -36,12 +37,12 @@ export function Feed() {
   return (
     <div className="flex h-screen">
       {/* Боковая панель */}
-      <div className="hidden sm:block fixed left-0 z-20 h-full md:w-64 lg:w-80 xl:w-96">
+      <div className="hidden sm:block fixed left-0 z-20 h-full">
         <Sidebar />
       </div>
 
       {/* Основной контент */}
-      <div className="flex flex-col w-full ml-[16rem] md:ml-64 lg:ml-80 xl:ml-96">
+      <div className="flex flex-col w-full ml-[16rem]">
         {/* Верхняя панель */}
         <div
           id="header"
@@ -115,7 +116,7 @@ export function Feed() {
                     post.image?.imageUrl
                       ? `http://localhost:3000${post.image.imageUrl}`
                       : undefined
-                  }
+                  } 
                 />
               ))}
           </div>
